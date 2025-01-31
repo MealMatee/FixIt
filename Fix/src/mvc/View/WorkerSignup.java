@@ -60,9 +60,7 @@ private Point initialClick;
         lblConfirmPassword = new javax.swing.JLabel();
         txtLastName = new swing.TextField();
         txtContact = new swing.TextField();
-        textField3 = new swing.TextField();
         txtFirstName = new swing.TextField();
-        textField7 = new swing.TextField();
         txtPassword = new swing.PasswordField();
         txtConfirmPassword = new swing.PasswordField();
         lblEmail = new javax.swing.JLabel();
@@ -148,6 +146,7 @@ private Point initialClick;
         genderGroup = new ButtonGroup();
         genderGroup.add(rbtnMale);
         genderGroup.add(rbtnFemale);
+        rbtnMale.setSelected(true);
         slide.setLayout(null);
 
         lblWorkerSignup.setBackground(new java.awt.Color(255, 255, 255));
@@ -158,17 +157,18 @@ private Point initialClick;
         slide.add(lblWorkerSignup);
         lblWorkerSignup.setBounds(110, 40, 280, 48);
 
-        btnSignup.setBackground(new java.awt.Color(35, 39, 153));
+        btnSignup.setBackground(new java.awt.Color(6, 57, 98));
         btnSignup.setForeground(new java.awt.Color(255, 255, 255));
-        btnSignup.setText("Sign Up");
+        btnSignup.setText("Next");
         btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSignup.setRound(40);
         btnSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignupActionPerformed(evt);
             }
         });
         slide.add(btnSignup);
-        btnSignup.setBounds(180, 530, 129, 60);
+        btnSignup.setBounds(180, 530, 180, 60);
 
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPassword.setText("Password :");
@@ -182,8 +182,9 @@ private Point initialClick;
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard.setText("DashBoard");
+        btnDashBoard.setText("Home Page");
         btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDashBoard.setRound(40);
         btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDashBoardActionPerformed(evt);
@@ -203,8 +204,9 @@ private Point initialClick;
         lblWorkCertificate.setBounds(290, 180, 150, 25);
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEmail.setRound(40);
         slide.add(txtEmail);
-        txtEmail.setBounds(40, 210, 180, 50);
+        txtEmail.setBounds(40, 210, 210, 50);
 
         lblGender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblGender.setText("Gender :");
@@ -223,53 +225,36 @@ private Point initialClick;
 
         txtLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtLastName.setPlaceholder("Enter Your Last Name");
+        txtLastName.setRound(40);
         txtLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLastNameActionPerformed(evt);
             }
         });
         slide.add(txtLastName);
-        txtLastName.setBounds(280, 130, 180, 50);
+        txtLastName.setBounds(280, 130, 220, 50);
 
         txtContact.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtContact.setPlaceholder("+977 98XXXXXXXX");
+        txtContact.setRound(40);
         txtContact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContactActionPerformed(evt);
             }
         });
         slide.add(txtContact);
-        txtContact.setBounds(40, 290, 180, 50);
-
-        textField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField3.setPlaceholder("Enter Your Last Name");
-        textField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField3ActionPerformed(evt);
-            }
-        });
-        slide.add(textField3);
-        textField3.setBounds(280, 130, 160, 50);
+        txtContact.setBounds(40, 290, 210, 50);
 
         txtFirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtFirstName.setPlaceholder("Enter Your First Name");
+        txtFirstName.setRound(40);
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstNameActionPerformed(evt);
             }
         });
         slide.add(txtFirstName);
-        txtFirstName.setBounds(40, 130, 180, 50);
-
-        textField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField7.setPlaceholder("Enter Your First Name");
-        textField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField7ActionPerformed(evt);
-            }
-        });
-        slide.add(textField7);
-        textField7.setBounds(40, 130, 160, 50);
+        txtFirstName.setBounds(40, 130, 210, 50);
 
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassword.setPlaceholder("Enter Your Password");
@@ -279,7 +264,7 @@ private Point initialClick;
             }
         });
         slide.add(txtPassword);
-        txtPassword.setBounds(40, 370, 430, 50);
+        txtPassword.setBounds(40, 370, 460, 50);
 
         txtConfirmPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtConfirmPassword.setPlaceholder("Re-Enter Your Password");
@@ -289,7 +274,7 @@ private Point initialClick;
             }
         });
         slide.add(txtConfirmPassword);
-        txtConfirmPassword.setBounds(40, 460, 430, 50);
+        txtConfirmPassword.setBounds(40, 460, 460, 50);
 
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblEmail.setText("Email :");
@@ -316,9 +301,11 @@ private Point initialClick;
         slide.add(rbtnMale);
         rbtnMale.setBounds(300, 300, 70, 20);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plumbing", "Electrician", "Carpentry" }));
+        jComboBox1.setOpaque(true);
         slide.add(jComboBox1);
-        jComboBox1.setBounds(290, 210, 160, 40);
+        jComboBox1.setBounds(290, 210, 200, 50);
 
         panelBorder1.add(slide);
         slide.setBounds(460, 10, 530, 610);
@@ -391,7 +378,6 @@ private Point initialClick;
             panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiente1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -451,11 +437,14 @@ private Point initialClick;
     }//GEN-LAST:event_slidehoverMouseExited
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_btnSignupActionPerformed
 
     private void btnDashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashBoardActionPerformed
         // TODO add your handling code here:
+         this.dispose();
+        HomePage home = new HomePage();
+        home.setVisible(true);
     }//GEN-LAST:event_btnDashBoardActionPerformed
 
     private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed
@@ -466,17 +455,9 @@ private Point initialClick;
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContactActionPerformed
 
-    private void textField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField3ActionPerformed
-
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
-
-    private void textField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField7ActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
@@ -586,8 +567,6 @@ private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {
     private javax.swing.JRadioButton rbtnMale;
     private swing.PanelSlide slide;
     private swing.PanelSlide slidehover;
-    private swing.TextField textField3;
-    private swing.TextField textField7;
     private javax.swing.JPanel titleBar;
     private swing.PasswordField txtConfirmPassword;
     private swing.TextField txtContact;

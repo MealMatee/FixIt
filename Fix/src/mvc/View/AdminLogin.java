@@ -39,8 +39,6 @@ public class AdminLogin extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         txtPassword = new swing.PasswordField();
         btnSignin = new swing.Button();
-        lblForgotPassword = new javax.swing.JLabel();
-        lblClickHere = new javax.swing.JLabel();
         btnDashBoard = new swing.Button();
         titleBar = new javax.swing.JPanel();
         btnClose = new javax.swing.JLabel();
@@ -113,22 +111,11 @@ public class AdminLogin extends javax.swing.JFrame {
             }
         });
 
-        lblForgotPassword.setText("Forgot Password?");
-
-        lblClickHere.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblClickHere.setForeground(new java.awt.Color(39, 35, 153));
-        lblClickHere.setText("Click Here");
-        lblClickHere.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblClickHere.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblClickHereMouseClicked(evt);
-            }
-        });
-
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard.setText("DashBoard");
+        btnDashBoard.setText("Home Page");
         btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDashBoard.setRound(40);
         btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDashBoardActionPerformed(evt);
@@ -149,12 +136,7 @@ public class AdminLogin extends javax.swing.JFrame {
                         .addGap(377, 377, 377))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblPassword)
-                        .addGap(346, 346, 346))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblForgotPassword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblClickHere)
-                        .addGap(9, 9, 9)))
+                        .addGap(346, 346, 346)))
                 .addGap(0, 44, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -183,11 +165,7 @@ public class AdminLogin extends javax.swing.JFrame {
                 .addComponent(lblPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblForgotPassword)
-                    .addComponent(lblClickHere))
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addComponent(btnSignin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(63, Short.MAX_VALUE))
         );
@@ -350,14 +328,10 @@ public class AdminLogin extends javax.swing.JFrame {
 
     private void btnDashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashBoardActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        HomePage home = new HomePage();
+        home.setVisible(true);
     }//GEN-LAST:event_btnDashBoardActionPerformed
-
-    private void lblClickHereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClickHereMouseClicked
-       // Hide the current window and open Security
-    Security securityWindow = new Security(this); // Pass the current instance
-    securityWindow.setVisible(true);
-    this.setVisible(false); // Hide the current window
-    }//GEN-LAST:event_lblClickHereMouseClicked
 
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
         // TODO add your handling code here:
@@ -409,9 +383,7 @@ public class AdminLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAdminLogin;
-    private javax.swing.JLabel lblClickHere;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblForgotPassword;
     private javax.swing.JLabel lblPassword;
     private swing.PanelBorder panelBorder1;
     private swing.PanelGradiente panelGradiente1;

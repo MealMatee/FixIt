@@ -55,15 +55,14 @@ public class UserSignup extends javax.swing.JFrame {
         emailField1 = new swing.EmailField();
         lblGender = new javax.swing.JLabel();
         lblContactNo = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         lblConfirmPassword = new javax.swing.JLabel();
         textField2 = new swing.TextField();
         textField5 = new swing.TextField();
-        textField3 = new swing.TextField();
         textField6 = new swing.TextField();
-        textField7 = new swing.TextField();
         passwordField1 = new swing.PasswordField();
         passwordField2 = new swing.PasswordField();
+        rbtnMale = new javax.swing.JRadioButton();
+        rbtnFemale = new javax.swing.JRadioButton();
         titleBar = new javax.swing.JPanel();
         btnClose = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JLabel();
@@ -149,17 +148,18 @@ public class UserSignup extends javax.swing.JFrame {
         slide.add(lbUserSignup);
         lbUserSignup.setBounds(110, 40, 250, 48);
 
-        btnSignup.setBackground(new java.awt.Color(35, 39, 153));
+        btnSignup.setBackground(new java.awt.Color(102, 102, 102));
         btnSignup.setForeground(new java.awt.Color(255, 255, 255));
-        btnSignup.setText("Sign Up");
+        btnSignup.setText("Next");
         btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSignup.setRound(40);
         btnSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignupActionPerformed(evt);
             }
         });
         slide.add(btnSignup);
-        btnSignup.setBounds(180, 530, 129, 60);
+        btnSignup.setBounds(180, 530, 160, 60);
 
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPassword.setText("Password :");
@@ -173,8 +173,9 @@ public class UserSignup extends javax.swing.JFrame {
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard.setText("DashBoard");
+        btnDashBoard.setText("Home Page");
         btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDashBoard.setRound(40);
         btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDashBoardActionPerformed(evt);
@@ -193,9 +194,11 @@ public class UserSignup extends javax.swing.JFrame {
         slide.add(lblEmail);
         lblEmail.setBounds(50, 180, 94, 25);
 
+        emailField1.setBackground(new java.awt.Color(204, 204, 204));
         emailField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        emailField1.setRound(40);
         slide.add(emailField1);
-        emailField1.setBounds(40, 210, 400, 50);
+        emailField1.setBounds(40, 210, 440, 50);
 
         lblGender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblGender.setText("Gender :");
@@ -207,28 +210,27 @@ public class UserSignup extends javax.swing.JFrame {
         slide.add(lblContactNo);
         lblContactNo.setBounds(50, 260, 110, 25);
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE" }));
-        slide.add(jComboBox1);
-        jComboBox1.setBounds(280, 290, 150, 50);
-
         lblConfirmPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblConfirmPassword.setText("Confirm Password :");
         slide.add(lblConfirmPassword);
         lblConfirmPassword.setBounds(50, 430, 160, 25);
 
+        textField2.setBackground(new java.awt.Color(204, 204, 204));
         textField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField2.setPlaceholder("Enter Your Last Name");
+        textField2.setRound(40);
         textField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textField2ActionPerformed(evt);
             }
         });
         slide.add(textField2);
-        textField2.setBounds(280, 130, 160, 50);
+        textField2.setBounds(280, 130, 200, 50);
 
+        textField5.setBackground(new java.awt.Color(204, 204, 204));
         textField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField5.setPlaceholder("+977 98XXXXXXXX");
+        textField5.setRound(40);
         textField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textField5ActionPerformed(evt);
@@ -237,38 +239,22 @@ public class UserSignup extends javax.swing.JFrame {
         slide.add(textField5);
         textField5.setBounds(40, 290, 180, 50);
 
-        textField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField3.setPlaceholder("Enter Your Last Name");
-        textField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField3ActionPerformed(evt);
-            }
-        });
-        slide.add(textField3);
-        textField3.setBounds(280, 130, 160, 50);
-
+        textField6.setBackground(new java.awt.Color(204, 204, 204));
         textField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textField6.setPlaceholder("Enter Your First Name");
+        textField6.setRound(40);
         textField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textField6ActionPerformed(evt);
             }
         });
         slide.add(textField6);
-        textField6.setBounds(40, 130, 160, 50);
+        textField6.setBounds(40, 130, 200, 50);
 
-        textField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField7.setPlaceholder("Enter Your First Name");
-        textField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField7ActionPerformed(evt);
-            }
-        });
-        slide.add(textField7);
-        textField7.setBounds(40, 130, 160, 50);
-
+        passwordField1.setBackground(new java.awt.Color(204, 204, 204));
         passwordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         passwordField1.setPlaceholder("Enter Your Password");
+        passwordField1.setRound(40);
         passwordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordField1ActionPerformed(evt);
@@ -277,8 +263,10 @@ public class UserSignup extends javax.swing.JFrame {
         slide.add(passwordField1);
         passwordField1.setBounds(40, 370, 390, 50);
 
+        passwordField2.setBackground(new java.awt.Color(204, 204, 204));
         passwordField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         passwordField2.setPlaceholder("Re-Enter Your Password");
+        passwordField2.setRound(40);
         passwordField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordField2ActionPerformed(evt);
@@ -286,6 +274,26 @@ public class UserSignup extends javax.swing.JFrame {
         });
         slide.add(passwordField2);
         passwordField2.setBounds(40, 460, 390, 50);
+
+        rbtnMale.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rbtnMale.setText("Male");
+        rbtnMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnMaleActionPerformed(evt);
+            }
+        });
+        slide.add(rbtnMale);
+        rbtnMale.setBounds(280, 300, 70, 20);
+
+        rbtnFemale.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rbtnFemale.setText("Female");
+        rbtnFemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnFemaleActionPerformed(evt);
+            }
+        });
+        slide.add(rbtnFemale);
+        rbtnFemale.setBounds(350, 300, 80, 20);
 
         panelBorder1.add(slide);
         slide.setBounds(490, 10, 500, 610);
@@ -421,11 +429,15 @@ public class UserSignup extends javax.swing.JFrame {
     }//GEN-LAST:event_slidehoverMouseExited
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnSignupActionPerformed
 
     private void btnDashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashBoardActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        HomePage home = new HomePage();
+        home.setVisible(true);
+                
     }//GEN-LAST:event_btnDashBoardActionPerformed
 
     private void textField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField2ActionPerformed
@@ -436,17 +448,9 @@ public class UserSignup extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textField5ActionPerformed
 
-    private void textField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField3ActionPerformed
-
     private void textField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textField6ActionPerformed
-
-    private void textField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField7ActionPerformed
 
     private void passwordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordField1ActionPerformed
         // TODO add your handling code here:
@@ -501,6 +505,14 @@ public class UserSignup extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnMinimize.setBackground(new Color(0, 153, 0));
     }//GEN-LAST:event_btnMinimizeMouseExited
+
+    private void rbtnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnMaleActionPerformed
+
+    private void rbtnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFemaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnFemaleActionPerformed
 private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {    
      jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/usersignupblur.png")));
         jLabel1.setVisible(true);
@@ -533,7 +545,6 @@ private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {
     private javax.swing.JLabel btnMinimize;
     private swing.Button btnSignup;
     private swing.EmailField emailField1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -550,13 +561,13 @@ private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {
     private swing.PanelGradiente panelGradiente1;
     private swing.PasswordField passwordField1;
     private swing.PasswordField passwordField2;
+    private javax.swing.JRadioButton rbtnFemale;
+    private javax.swing.JRadioButton rbtnMale;
     private swing.PanelSlide slide;
     private swing.PanelSlide slidehover;
     private swing.TextField textField2;
-    private swing.TextField textField3;
     private swing.TextField textField5;
     private swing.TextField textField6;
-    private swing.TextField textField7;
     private javax.swing.JPanel titleBar;
     // End of variables declaration//GEN-END:variables
 private javax.swing.JLabel btnSignin;
