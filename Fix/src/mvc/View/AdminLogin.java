@@ -127,7 +127,7 @@ public class AdminLogin extends javax.swing.JFrame {
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard.setText("DashBoard");
+        btnDashBoard.setText("Home Page");
         btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -148,6 +148,7 @@ private Point initialClick;
         genderGroup = new ButtonGroup();
         genderGroup.add(rbtnMale);
         genderGroup.add(rbtnFemale);
+        rbtnMale.setSelected(true);
         slide.setLayout(null);
 
         lblWorkerSignup.setBackground(new java.awt.Color(255, 255, 255));
@@ -182,7 +183,7 @@ private Point initialClick;
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard.setText("DashBoard");
+        btnDashBoard.setText("Home Page");
         btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,7 +317,7 @@ private Point initialClick;
         slide.add(rbtnMale);
         rbtnMale.setBounds(300, 300, 70, 20);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plumbing", "Electrician", "Wood Working" }));
         slide.add(jComboBox1);
         jComboBox1.setBounds(290, 210, 160, 40);
 
@@ -391,7 +392,6 @@ private Point initialClick;
             panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiente1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
