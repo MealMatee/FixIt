@@ -182,8 +182,9 @@ public class UserLogin extends javax.swing.JFrame {
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard.setText("DashBoard");
+        btnDashBoard.setText("Home Page");
         btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDashBoard.setRound(40);
         btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDashBoardActionPerformed(evt);
@@ -404,6 +405,9 @@ private void makeDraggable() {
 
     private void btnDashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashBoardActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        HomePage home = new HomePage();
+        home.setVisible(true);
     }//GEN-LAST:event_btnDashBoardActionPerformed
 
     private void lblClickHereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClickHereMouseClicked

@@ -75,6 +75,11 @@ public class Security extends javax.swing.JFrame {
         btnSubmit.setText("Submit");
         btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnSubmit.setRound(50);
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
         panelBorder1.add(btnSubmit);
         btnSubmit.setBounds(120, 360, 160, 50);
 
@@ -189,7 +194,6 @@ public class Security extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -272,6 +276,11 @@ private void makeDraggable() {
         parentWindow.setVisible(true);
         }
     }//GEN-LAST:event_btnBackMouseClicked
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
      * @param args the command line arguments

@@ -172,12 +172,6 @@
                                       <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="346" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblForgotPassword" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblClickHere" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
                           </Group>
@@ -212,12 +206,7 @@
                               <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPassword" min="-2" pref="55" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblForgotPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblClickHere" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="btnSignin" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace pref="63" max="32767" attributes="0"/>
                           </Group>
@@ -303,28 +292,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSigninActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lblForgotPassword">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Forgot Password?"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblClickHere">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="12" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="99" green="23" red="27" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Click Here"/>
-                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblClickHereMouseClicked"/>
-                      </Events>
-                    </Component>
                     <Component class="swing.Button" name="btnDashBoard">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -333,10 +300,11 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="DashBoard"/>
+                        <Property name="text" type="java.lang.String" value="Home Page"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="12" style="1"/>
                         </Property>
+                        <Property name="round" type="int" value="40"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDashBoardActionPerformed"/>
