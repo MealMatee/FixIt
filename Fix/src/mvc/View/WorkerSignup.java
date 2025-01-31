@@ -12,6 +12,10 @@ import java.awt.event.MouseEvent;
 import swing.RippleEffectLabel;
 import swing.RoundedBorder;
 import javax.swing.ButtonGroup;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 
 /**
@@ -21,7 +25,7 @@ import javax.swing.ButtonGroup;
 public class WorkerSignup extends javax.swing.JFrame {
 private Point initialClick;
     /**
-     * Creates new form worker_singup
+     * Creates new form worker_signup
      */
     public WorkerSignup() {
         initComponents();
@@ -60,9 +64,7 @@ private Point initialClick;
         lblConfirmPassword = new javax.swing.JLabel();
         txtLastName = new swing.TextField();
         txtContact = new swing.TextField();
-        textField3 = new swing.TextField();
         txtFirstName = new swing.TextField();
-        textField7 = new swing.TextField();
         txtPassword = new swing.PasswordField();
         txtConfirmPassword = new swing.PasswordField();
         lblEmail = new javax.swing.JLabel();
@@ -144,7 +146,6 @@ private Point initialClick;
         slidehover.setBounds(10, 10, 480, 610);
 
         slide.setBackground(new java.awt.Color(255, 255, 255));
-        // Inside initComponents() method
         genderGroup = new ButtonGroup();
         genderGroup.add(rbtnMale);
         genderGroup.add(rbtnFemale);
@@ -159,10 +160,11 @@ private Point initialClick;
         slide.add(lblWorkerSignup);
         lblWorkerSignup.setBounds(110, 40, 280, 48);
 
-        btnSignup.setBackground(new java.awt.Color(35, 39, 153));
+        btnSignup.setBackground(new java.awt.Color(153, 153, 153));
         btnSignup.setForeground(new java.awt.Color(255, 255, 255));
-        btnSignup.setText("Sign Up");
+        btnSignup.setText("Next");
         btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSignup.setRound(40);
         btnSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignupActionPerformed(evt);
@@ -204,8 +206,9 @@ private Point initialClick;
         lblWorkCertificate.setBounds(290, 180, 150, 25);
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEmail.setRound(40);
         slide.add(txtEmail);
-        txtEmail.setBounds(40, 210, 180, 50);
+        txtEmail.setBounds(40, 210, 200, 50);
 
         lblGender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblGender.setText("Gender :");
@@ -222,18 +225,39 @@ private Point initialClick;
         slide.add(lblConfirmPassword);
         lblConfirmPassword.setBounds(50, 430, 160, 25);
 
+        txtLastName.setText("");
         txtLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtLastName.setPlaceholder("Enter Your Last Name");
+        txtLastName.setRound(40);
         txtLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLastNameActionPerformed(evt);
             }
         });
         slide.add(txtLastName);
-        txtLastName.setBounds(280, 130, 180, 50);
+        txtLastName.setBounds(280, 130, 200, 50);
 
         txtContact.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtContact.setPlaceholder("+977 98XXXXXXXX");
+        txtContact.setPlaceholder("+977-");
+        txtContact.setRound(40);
+        // Restrict input to numbers only and limit to 10 digits
+        ((AbstractDocument) txtContact.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text.matches("\\d+") && (fb.getDocument().getLength() + text.length() <= 15)) {
+                    // Only allow digits and ensure total length doesn't exceed 10
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+
+            @Override
+            public void insertString(FilterBypass fb, int offset, String text, AttributeSet attrs) throws BadLocationException {
+                if (text.matches("\\d+") && (fb.getDocument().getLength() + text.length() <= 15)) {
+                    // Only allow digits and ensure total length doesn't exceed 10
+                    super.insertString(fb, offset, text, attrs);
+                }
+            }
+        });
         txtContact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContactActionPerformed(evt);
@@ -242,38 +266,20 @@ private Point initialClick;
         slide.add(txtContact);
         txtContact.setBounds(40, 290, 180, 50);
 
-        textField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField3.setPlaceholder("Enter Your Last Name");
-        textField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField3ActionPerformed(evt);
-            }
-        });
-        slide.add(textField3);
-        textField3.setBounds(280, 130, 160, 50);
-
         txtFirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtFirstName.setPlaceholder("Enter Your First Name");
+        txtFirstName.setRound(40);
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstNameActionPerformed(evt);
             }
         });
         slide.add(txtFirstName);
-        txtFirstName.setBounds(40, 130, 180, 50);
-
-        textField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField7.setPlaceholder("Enter Your First Name");
-        textField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField7ActionPerformed(evt);
-            }
-        });
-        slide.add(textField7);
-        textField7.setBounds(40, 130, 160, 50);
+        txtFirstName.setBounds(40, 130, 200, 50);
 
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassword.setPlaceholder("Enter Your Password");
+        txtPassword.setRound(40);
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -284,6 +290,7 @@ private Point initialClick;
 
         txtConfirmPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtConfirmPassword.setPlaceholder("Re-Enter Your Password");
+        txtConfirmPassword.setRound(40);
         txtConfirmPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmPasswordActionPerformed(evt);
@@ -317,6 +324,7 @@ private Point initialClick;
         slide.add(rbtnMale);
         rbtnMale.setBounds(300, 300, 70, 20);
 
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plumbing", "Electrician", "Wood Working" }));
         slide.add(jComboBox1);
         jComboBox1.setBounds(290, 210, 160, 40);
@@ -462,21 +470,9 @@ private Point initialClick;
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLastNameActionPerformed
 
-    private void txtContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContactActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContactActionPerformed
-
-    private void textField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField3ActionPerformed
-
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
-
-    private void textField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField7ActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
@@ -538,6 +534,10 @@ private Point initialClick;
     private void rbtnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMaleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnMaleActionPerformed
+
+    private void txtContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContactActionPerformed
 private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {    
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/workersignupblur.png")));
         jLabel1.setVisible(true);
@@ -586,8 +586,6 @@ private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {
     private javax.swing.JRadioButton rbtnMale;
     private swing.PanelSlide slide;
     private swing.PanelSlide slidehover;
-    private swing.TextField textField3;
-    private swing.TextField textField7;
     private javax.swing.JPanel titleBar;
     private swing.PasswordField txtConfirmPassword;
     private swing.TextField txtContact;

@@ -161,7 +161,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Inside initComponents() method&#xd;&#xa;genderGroup = new ButtonGroup();&#xd;&#xa;genderGroup.add(rbtnMale);&#xd;&#xa;genderGroup.add(rbtnFemale);&#xd;&#xa;rbtnMale.setSelected(true);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="genderGroup = new ButtonGroup();&#xd;&#xa;genderGroup.add(rbtnMale);&#xd;&#xa;genderGroup.add(rbtnFemale);&#xd;&#xa;rbtnMale.setSelected(true);"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -196,15 +196,16 @@
                 <Component class="swing.Button" name="btnSignup">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="99" green="27" red="23" type="rgb"/>
+                      <Color blue="99" green="99" red="99" type="rgb"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Sign Up"/>
+                    <Property name="text" type="java.lang.String" value="Next"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
                     </Property>
+                    <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignupActionPerformed"/>
@@ -294,10 +295,11 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
+                    <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="40" y="210" width="180" height="50"/>
+                      <AbsoluteConstraints x="40" y="210" width="200" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -342,17 +344,19 @@
                 </Component>
                 <Component class="swing.TextField" name="txtLastName">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value=""/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Enter Your Last Name"/>
+                    <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLastNameActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="280" y="130" width="180" height="50"/>
+                      <AbsoluteConstraints x="280" y="130" width="200" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -361,30 +365,18 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
-                    <Property name="placeholder" type="java.lang.String" value="+977 98XXXXXXXX"/>
+                    <Property name="placeholder" type="java.lang.String" value="+977-"/>
+                    <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtContactActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Restrict input to numbers only and limit to 10 digits&#xd;&#xa;    ((AbstractDocument) txtContact.getDocument()).setDocumentFilter(new DocumentFilter() {&#xd;&#xa;        @Override&#xd;&#xa;        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {&#xd;&#xa;            if (text.matches(&quot;\\d+&quot;) &amp;&amp; (fb.getDocument().getLength() + text.length() &lt;= 15)) {&#xd;&#xa;                // Only allow digits and ensure total length doesn&apos;t exceed 10&#xd;&#xa;                super.replace(fb, offset, length, text, attrs);&#xd;&#xa;            }&#xd;&#xa;        }&#xd;&#xa;&#xd;&#xa;        @Override&#xd;&#xa;        public void insertString(FilterBypass fb, int offset, String text, AttributeSet attrs) throws BadLocationException {&#xd;&#xa;            if (text.matches(&quot;\\d+&quot;) &amp;&amp; (fb.getDocument().getLength() + text.length() &lt;= 15)) {&#xd;&#xa;                // Only allow digits and ensure total length doesn&apos;t exceed 10&#xd;&#xa;                super.insertString(fb, offset, text, attrs);&#xd;&#xa;            }&#xd;&#xa;        }&#xd;&#xa;    });&#xd;&#xa;"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="40" y="290" width="180" height="50"/>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-                <Component class="swing.TextField" name="textField3">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="0"/>
-                    </Property>
-                    <Property name="placeholder" type="java.lang.String" value="Enter Your Last Name"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField3ActionPerformed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="280" y="130" width="160" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -394,29 +386,14 @@
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Enter Your First Name"/>
+                    <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFirstNameActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="40" y="130" width="180" height="50"/>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-                <Component class="swing.TextField" name="textField7">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="0"/>
-                    </Property>
-                    <Property name="placeholder" type="java.lang.String" value="Enter Your First Name"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField7ActionPerformed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="40" y="130" width="160" height="50"/>
+                      <AbsoluteConstraints x="40" y="130" width="200" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -426,6 +403,7 @@
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Enter Your Password"/>
+                    <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordActionPerformed"/>
@@ -442,6 +420,7 @@
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Re-Enter Your Password"/>
+                    <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtConfirmPasswordActionPerformed"/>
@@ -499,6 +478,9 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBox1">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="3">
                         <StringItem index="0" value="Plumbing"/>

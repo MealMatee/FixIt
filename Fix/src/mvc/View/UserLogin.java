@@ -97,7 +97,7 @@ public class UserLogin extends javax.swing.JFrame {
         btnSignup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         slidehover.add(btnSignup);
-        btnSignup.setBounds(150, 350, 160, 60);
+        btnSignup.setBounds(100, 290, 190, 60);
 
         btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -184,6 +184,7 @@ public class UserLogin extends javax.swing.JFrame {
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
         btnDashBoard.setText("Home Page");
         btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDashBoard.setRound(40);
         btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDashBoardActionPerformed(evt);
@@ -229,8 +230,8 @@ public class UserLogin extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnDashBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addComponent(btnDashBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUserLogin)
                 .addGap(22, 22, 22)
                 .addComponent(lblEmail)
@@ -366,7 +367,18 @@ public class UserLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-private void makeDraggable() {
+private void btnSignupMouseEntered(java.awt.event.MouseEvent evt) {    
+  jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userblur.png")));
+        jLabel1.setVisible(true);
+        jLabel2.setVisible(true);
+        btnSignup.setVisible(true);
+}
+    private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {  
+        UserSignup signup = new UserSignup();
+        signup.setVisible(true);
+        this.setVisible(false);
+    }
+    private void makeDraggable() {
         // MouseListener for dragging the window
         titleBar.addMouseListener(new MouseAdapter() {
             @Override
@@ -404,6 +416,9 @@ private void makeDraggable() {
 
     private void btnDashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashBoardActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        HomePage home = new HomePage();
+        home.setVisible(true);
     }//GEN-LAST:event_btnDashBoardActionPerformed
 
     private void lblClickHereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClickHereMouseClicked
@@ -459,20 +474,7 @@ private void makeDraggable() {
         // TODO add your handling code here:
         btnMinimize.setBackground(new Color(204,204,255));
     }//GEN-LAST:event_btnMinimizeMouseExited
-    
-    private void btnSignupMouseEntered(java.awt.event.MouseEvent evt) {   
-          // TODO add your handling code here:
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userblur.png")));
-        jLabel1.setVisible(true);
-        jLabel2.setVisible(true);
-        btnSignup.setVisible(true);
-    } 
-    
-     private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {  
-       UserSignup signup = new UserSignup();
-        signup.setVisible(true);
-        this.setVisible(false);
-    }
+   
      public static void main(String args[]) {
         FlatIntelliJLaf.setup();
        
@@ -506,4 +508,5 @@ private void makeDraggable() {
     private swing.TextField txtEmail;
     private swing.PasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
-private javax.swing.JLabel btnSignup;}
+private javax.swing.JLabel btnSignup;
+}

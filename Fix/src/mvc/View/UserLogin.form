@@ -149,7 +149,7 @@
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MouseExited"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="btnSignup = new RippleEffectLabel(&quot;Sign Up&quot;);&#xd;&#xa;        btnSignup.setFont(new java.awt.Font(&quot;Segoe UI&quot;, 1, 20)); // You can adjust the font as needed&#xd;&#xa;        btnSignup.setForeground(new java.awt.Color(255, 255, 255)); // Text color&#xd;&#xa;        btnSignup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);&#xd;&#xa;        btnSignup.setBorder(new RoundedBorder(40, Color.WHITE, 2)); // Rounded border as in your original code&#xd;&#xa;        btnSignup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));&#xd;&#xa;&#xd;&#xa;        slidehover.add(btnSignup);&#xd;&#xa;        btnSignup.setBounds(150, 350, 160, 60);&#xd;&#xa;&#xd;&#xa;        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {&#xd;&#xa;            public void mouseEntered(java.awt.event.MouseEvent evt) {&#xd;&#xa;                btnSignupMouseEntered(evt);&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;        });&#xd;&#xa;        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {&#xd;&#xa;            public void mouseClicked(java.awt.event.MouseEvent evt) {&#xd;&#xa;                btnSignupMouseClicked(evt);&#xd;&#xa;            }&#xd;&#xa;        });"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="btnSignup = new RippleEffectLabel(&quot;Sign Up&quot;);&#xd;&#xa;        btnSignup.setFont(new java.awt.Font(&quot;Segoe UI&quot;, 1, 20)); // You can adjust the font as needed&#xd;&#xa;        btnSignup.setForeground(new java.awt.Color(255, 255, 255)); // Text color&#xd;&#xa;        btnSignup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);&#xd;&#xa;        btnSignup.setBorder(new RoundedBorder(40, Color.WHITE, 2)); // Rounded border as in your original code&#xd;&#xa;        btnSignup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));&#xd;&#xa;&#xd;&#xa;        slidehover.add(btnSignup);&#xd;&#xa;        btnSignup.setBounds(100, 290, 190, 60);&#xd;&#xa;&#xd;&#xa;        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {&#xd;&#xa;            public void mouseEntered(java.awt.event.MouseEvent evt) {&#xd;&#xa;                btnSignupMouseEntered(evt);&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;        });&#xd;&#xa;        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {&#xd;&#xa;            public void mouseClicked(java.awt.event.MouseEvent evt) {&#xd;&#xa;                btnSignupMouseClicked(evt);&#xd;&#xa;            }&#xd;&#xa;        });"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -248,8 +248,8 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnDashBoard" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="btnDashBoard" min="-2" pref="49" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblUserLogin" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
@@ -377,6 +377,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="12" style="1"/>
                         </Property>
+                        <Property name="round" type="int" value="40"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDashBoardActionPerformed"/>
