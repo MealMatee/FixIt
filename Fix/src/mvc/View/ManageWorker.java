@@ -4,6 +4,13 @@
  */
 package mvc.View;
 
+import controller.AdminController;
+import controller.WorkerController.Worker;
+import java.awt.Dimension;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Legion
@@ -15,6 +22,7 @@ public class ManageWorker extends javax.swing.JPanel {
      */
     public ManageWorker() {
         initComponents();
+initializeWorkerTable();
     }
 
     /**
@@ -30,18 +38,18 @@ public class ManageWorker extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        textField1 = new swing.TextField();
-        textField2 = new swing.TextField();
-        textField3 = new swing.TextField();
-        button1 = new swing.Button();
-        button2 = new swing.Button();
-        button3 = new swing.Button();
-        button4 = new swing.Button();
-        button5 = new swing.Button();
-        button7 = new swing.Button();
-        button6 = new swing.Button();
+        id_input = new swing.TextField();
+        phone_input = new swing.TextField();
+        email_input = new swing.TextField();
+        id_btn = new swing.Button();
+        phone_btn = new swing.Button();
+        email_btn = new swing.Button();
+        clear_btn = new swing.Button();
+        filter_btn = new swing.Button();
+        delete_btn = new swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        worker_table = new javax.swing.JTable();
+        worker_id = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(4, 44, 90));
 
@@ -54,57 +62,57 @@ public class ManageWorker extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Email:");
 
-        textField1.setText("");
-        textField1.setPlaceholder("");
+        id_input.setText("");
+        id_input.setPlaceholder("");
 
-        textField2.setPlaceholder("");
+        phone_input.setPlaceholder("");
 
-        textField3.setPlaceholder("");
+        email_input.setPlaceholder("");
 
-        button1.setBackground(new java.awt.Color(4, 44, 90));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("SEARCH");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        id_btn.setBackground(new java.awt.Color(4, 44, 90));
+        id_btn.setForeground(new java.awt.Color(255, 255, 255));
+        id_btn.setText("SEARCH");
+        id_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                id_btnActionPerformed(evt);
             }
         });
 
-        button2.setBackground(new java.awt.Color(4, 44, 90));
-        button2.setForeground(new java.awt.Color(255, 255, 255));
-        button2.setText("SEARCH");
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        phone_btn.setBackground(new java.awt.Color(4, 44, 90));
+        phone_btn.setForeground(new java.awt.Color(255, 255, 255));
+        phone_btn.setText("SEARCH");
+        phone_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                phone_btnActionPerformed(evt);
             }
         });
 
-        button3.setBackground(new java.awt.Color(4, 44, 90));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
-        button3.setText("SEARCH");
-        button3.addActionListener(new java.awt.event.ActionListener() {
+        email_btn.setBackground(new java.awt.Color(4, 44, 90));
+        email_btn.setForeground(new java.awt.Color(255, 255, 255));
+        email_btn.setText("SEARCH");
+        email_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
+                email_btnActionPerformed(evt);
             }
         });
 
-        button4.setBackground(new java.awt.Color(4, 44, 90));
-        button4.setForeground(new java.awt.Color(255, 255, 255));
-        button4.setText("CLEAR");
-        button4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        button4.addActionListener(new java.awt.event.ActionListener() {
+        clear_btn.setBackground(new java.awt.Color(4, 44, 90));
+        clear_btn.setForeground(new java.awt.Color(255, 255, 255));
+        clear_btn.setText("CLEAR");
+        clear_btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clear_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button4ActionPerformed(evt);
+                clear_btnActionPerformed(evt);
             }
         });
 
-        button5.setBackground(new java.awt.Color(4, 44, 90));
-        button5.setForeground(new java.awt.Color(255, 255, 255));
-        button5.setText("FILTER");
-        button5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        button5.addActionListener(new java.awt.event.ActionListener() {
+        filter_btn.setBackground(new java.awt.Color(4, 44, 90));
+        filter_btn.setForeground(new java.awt.Color(255, 255, 255));
+        filter_btn.setText("FILTER");
+        filter_btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filter_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button5ActionPerformed(evt);
+                filter_btnActionPerformed(evt);
             }
         });
 
@@ -122,20 +130,19 @@ public class ManageWorker extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
-                                .addComponent(textField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(id_input, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                            .addComponent(phone_input, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                            .addComponent(email_input, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(113, 113, 113)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
-                        .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(clear_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 507, Short.MAX_VALUE)
+                        .addComponent(filter_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phone_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,41 +151,41 @@ public class ManageWorker extends javax.swing.JPanel {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(phone_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phone_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clear_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filter_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        button7.setBackground(new java.awt.Color(204, 204, 204));
-        button7.setForeground(new java.awt.Color(255, 51, 51));
-        button7.setText("DELETE");
-        button7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        button7.addActionListener(new java.awt.event.ActionListener() {
+        delete_btn.setBackground(new java.awt.Color(204, 204, 204));
+        delete_btn.setForeground(new java.awt.Color(255, 51, 51));
+        delete_btn.setText("DELETE");
+        delete_btn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        delete_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                delete_btnMouseClicked(evt);
+            }
+        });
+        delete_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button7ActionPerformed(evt);
+                delete_btnActionPerformed(evt);
             }
         });
 
-        button6.setBackground(new java.awt.Color(204, 204, 204));
-        button6.setForeground(new java.awt.Color(255, 51, 51));
-        button6.setText("UPDATE");
-        button6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        worker_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -189,23 +196,30 @@ public class ManageWorker extends javax.swing.JPanel {
                 "First Name", "Last Name", "Email", "Working Sector", "Gender", "Phone", "Password"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(worker_table);
+
+        worker_id.setText("worker_id");
+        worker_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                worker_idActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(500, 500, 500)
-                .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(worker_id, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(delete_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -217,53 +231,162 @@ public class ManageWorker extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(delete_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(worker_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void id_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_id_btnActionPerformed
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    private void phone_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phone_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_phone_btnActionPerformed
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+    private void email_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button3ActionPerformed
+    }//GEN-LAST:event_email_btnActionPerformed
 
-    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+    private void clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button4ActionPerformed
+    }//GEN-LAST:event_clear_btnActionPerformed
 
-    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+    private void filter_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filter_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button5ActionPerformed
+    }//GEN-LAST:event_filter_btnActionPerformed
 
-    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+    private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button7ActionPerformed
+    }//GEN-LAST:event_delete_btnActionPerformed
+
+    private void worker_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_worker_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_worker_idActionPerformed
+
+    private void delete_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delete_btnMouseClicked
+        // TODO add your handling code here:
+		int workerId = Integer.parseInt(worker_id.getText());
+		boolean success = AdminController.deleteWorker(workerId);
+		if(success){
+			JOptionPane.showMessageDialog(this, "removed!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+initializeWorkerTable();
+		}else {
+			JOptionPane.showMessageDialog(this, "failed", "Error", JOptionPane.INFORMATION_MESSAGE);
+		}
+    }//GEN-LAST:event_delete_btnMouseClicked
+
+	public void initializeWorkerTable() {
+		// Set table formatting
+		worker_table.setRowMargin(10);
+		worker_table.setIntercellSpacing(new Dimension(15, 10));
+		worker_table.setRowHeight(30);
+
+		// Create and set table model
+		DefaultTableModel model = new DefaultTableModel(
+				new Object[][]{},
+				new String[]{"ID", "First Name", "Last Name", "Email", "Category", "Phone", "Gender"}
+		) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false; // Make table read-only
+			}
+		};
+		worker_table.setModel(model);
+
+		// Load all workers initially
+		displayAllWorkers();
+
+		// Add button listeners
+		filter_btn.addActionListener(e -> filterWorkers());
+		clear_btn.addActionListener(e -> {
+			clearInputs();
+			displayAllWorkers();
+		});
+	}
+
+	private void filterWorkers() {
+		String id = id_input.getText().trim();
+		String phone = phone_input.getText().trim();
+		String email = email_input.getText().trim();
+
+		Worker worker = null;
+
+		if (!id.isEmpty()) {
+			try {
+				worker = AdminController.getWorkerById(Integer.parseInt(id));
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(this, "Please enter a valid ID", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+		} else if (!phone.isEmpty()) {
+			worker = AdminController.getWorkerByPhone(phone);
+		} else if (!email.isEmpty()) {
+			worker = AdminController.getWorkerByEmail(email);
+		}
+
+		DefaultTableModel model = (DefaultTableModel) worker_table.getModel();
+		model.setRowCount(0);
+
+		if (worker != null) {
+			model.addRow(new Object[]{
+				worker.getWorkerId(),
+				worker.getFirstName(),
+				worker.getLastName(),
+				worker.getEmail(),
+				worker.getCategory(),
+				worker.getPhone(),
+				worker.getGender()
+			});
+		} else {
+			JOptionPane.showMessageDialog(this, "No worker found", "Information", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+
+	private void clearInputs() {
+		id_input.setText("");
+		phone_input.setText("");
+		email_input.setText("");
+	}
+
+	private void displayAllWorkers() {
+		DefaultTableModel model = (DefaultTableModel) worker_table.getModel();
+		model.setRowCount(0); // Clear existing rows
+
+		List<Worker> workers = AdminController.getAllWorkers();
+		for (Worker worker : workers) {
+			model.addRow(new Object[]{
+				worker.getWorkerId(),
+				worker.getFirstName(),
+				worker.getLastName(),
+				worker.getEmail(),
+				worker.getCategory(),
+				worker.getPhone(),
+				worker.getGender()
+			});
+		}
+	}
+
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.Button button1;
-    private swing.Button button2;
-    private swing.Button button3;
-    private swing.Button button4;
-    private swing.Button button5;
-    private swing.Button button6;
-    private swing.Button button7;
+    private swing.Button clear_btn;
+    private swing.Button delete_btn;
+    private swing.Button email_btn;
+    private swing.TextField email_input;
+    private swing.Button filter_btn;
+    private swing.Button id_btn;
+    private swing.TextField id_input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private swing.TextField textField1;
-    private swing.TextField textField2;
-    private swing.TextField textField3;
+    private swing.Button phone_btn;
+    private swing.TextField phone_input;
+    private javax.swing.JTextField worker_id;
+    private javax.swing.JTable worker_table;
     // End of variables declaration//GEN-END:variables
 }

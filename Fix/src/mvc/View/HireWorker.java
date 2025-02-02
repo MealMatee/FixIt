@@ -4,6 +4,17 @@
  */
 package mvc.View;
 
+import controller.AuthenticationController;
+import controller.UserController;
+import static controller.UserController.getWorkersByCategory;
+import controller.WorkerController.Worker;
+import static controller.WorkerController.getAllWorkers;
+import java.awt.Dimension;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Legion
@@ -15,7 +26,106 @@ public class HireWorker extends javax.swing.JPanel {
      */
     public HireWorker() {
         initComponents();
+	displayWorkerTable();
     }
+
+	public void displayWorkerTable() {
+		// Set table formatting
+		category_table.setRowMargin(10);
+		category_table.setIntercellSpacing(new Dimension(15, 10));
+		category_table.setRowHeight(30);
+
+		// Get initial worker list
+		List<Worker> workers = getAllWorkers();
+
+		// Create table model
+		DefaultTableModel model = (DefaultTableModel) category_table.getModel();
+		model.setRowCount(0); // Clear existing rows
+
+		// Set column headers if not already set
+		if (model.getColumnCount() == 0) {
+			model.setColumnIdentifiers(new Object[]{
+				"ID", "First Name", "Last Name", "Email", "Category" 
+			});
+		}
+
+		// Populate table with all workers initially
+		for (Worker worker : workers) {
+			model.addRow(new Object[]{
+				worker.getWorkerId(),
+				worker.getFirstName(),
+				worker.getLastName(),
+				worker.getEmail(),
+				getCategoryName(worker.getCategory())
+			});
+		}
+
+		// Initialize category combo box with specific categories
+		DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<>();
+		comboModel.addElement("All");
+		comboModel.addElement("Plumber");
+		comboModel.addElement("Electrician");
+		comboModel.addElement("Carpenter");
+		category.setModel(comboModel);
+
+		// Add category filter listener
+		category.addActionListener(e -> {
+			String selectedCategory = (String) category.getSelectedItem();
+			if (selectedCategory == null) {
+				return;
+			}
+
+			// Clear existing rows
+			model.setRowCount(0);
+
+			// Get filtered list based on selection
+			List<Worker> filteredWorkers = selectedCategory.equals("All")
+					? getAllWorkers() : getWorkersByCategory(getCategoryPosition(selectedCategory));
+
+			// Populate table with filtered data
+			for (Worker worker : filteredWorkers) {
+				model.addRow(new Object[]{
+					worker.getWorkerId(),
+					worker.getFirstName(),
+					worker.getLastName(),
+					worker.getEmail(),
+					getCategoryName(worker.getCategory()), // Convert category number to name
+					worker.getPhone(),
+					worker.getGender()
+				});
+			}
+		});
+	}
+
+// Helper method to convert category number to name
+	private String getCategoryName(String categoryNumber) {
+		switch (categoryNumber) {
+			case "1":
+				return "Plumber";
+			case "2":
+				return "Electrician";
+			case "3":
+				return "Carpenter";
+			default:
+				return "Unknown";
+		}
+	}
+
+// Modified to accept String input
+	private String getCategoryPosition(String category) {
+		switch (category.toLowerCase()) {
+			case "plumber":
+				return "1";
+			case "electrician":
+				return "2";
+			case "carpenter":
+				return "3";
+			default:
+				return "0";
+		}
+	}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,13 +138,13 @@ public class HireWorker extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        category = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        category_table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        textField1 = new swing.TextField();
-        button1 = new swing.Button();
+        worker_id_input = new swing.TextField();
+        enter_btn = new swing.Button();
 
         setOpaque(false);
 
@@ -45,12 +155,12 @@ public class HireWorker extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         jPanel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plumbing", "Electrician", "Wood Working" }));
-        jComboBox1.setBorder(new javax.swing.border.MatteBorder(null));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        category.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plumbing", "Electrician", "Wood Working" }));
+        category.setBorder(new javax.swing.border.MatteBorder(null));
+        category.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                categoryActionPerformed(evt);
             }
         });
 
@@ -65,7 +175,7 @@ public class HireWorker extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(category, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -75,65 +185,69 @@ public class HireWorker extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        category_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Phone", "Category"
+                "ID", "full_name", "last_name", "email", "Category"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(category_table);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Enter ID to hire: ");
 
-        textField1.setText("Entetr ID");
-        textField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        worker_id_input.setText("Entetr ID");
+        worker_id_input.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        button1.setBackground(new java.awt.Color(0, 41, 88));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Enter");
-        button1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        enter_btn.setBackground(new java.awt.Color(0, 41, 88));
+        enter_btn.setForeground(new java.awt.Color(255, 255, 255));
+        enter_btn.setText("Enter");
+        enter_btn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        enter_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                enter_btnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(worker_id_input, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 955, Short.MAX_VALUE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addComponent(enter_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,8 +258,8 @@ public class HireWorker extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enter_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(worker_id_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
@@ -168,20 +282,33 @@ public class HireWorker extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_categoryActionPerformed
+
+    private void enter_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enter_btnMouseClicked
+        // TODO add your handling code here:
+		String worker_id = worker_id_input.getText().trim();
+		boolean sucess = UserController.hireWorker(AuthenticationController.getCurrentUserId(), Integer.parseInt(worker_id));
+		if(sucess){
+			JOptionPane.showMessageDialog(this, "successful booked!!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			worker_id_input.setText("");
+		}else{
+			JOptionPane.showMessageDialog(this, "Failed to booked!!", "Error", JOptionPane.INFORMATION_MESSAGE);
+			worker_id_input.setText("");
+		}
+    }//GEN-LAST:event_enter_btnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.Button button1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> category;
+    private javax.swing.JTable category_table;
+    private swing.Button enter_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private swing.TextField textField1;
+    private swing.TextField worker_id_input;
     // End of variables declaration//GEN-END:variables
 }

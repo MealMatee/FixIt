@@ -5,6 +5,7 @@
 package mvc.View;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import model.DatabaseConnection;
 
 /**
  *
@@ -18,6 +19,7 @@ public class HomePage extends javax.swing.JFrame {
      */
     public HomePage() {
          initComponents();
+		 DatabaseConnection.initializeDatabase();
     
     }
 
@@ -45,7 +47,6 @@ public class HomePage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1080));
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -87,6 +88,11 @@ public class HomePage extends javax.swing.JFrame {
         btnUser.setForeground(new java.awt.Color(255, 255, 255));
         btnUser.setText("User");
         btnUser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUserMouseClicked(evt);
+            }
+        });
         btnUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUserActionPerformed(evt);
@@ -97,6 +103,11 @@ public class HomePage extends javax.swing.JFrame {
         btnWorker.setForeground(new java.awt.Color(255, 255, 255));
         btnWorker.setText("Worker");
         btnWorker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnWorker.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnWorkerMouseClicked(evt);
+            }
+        });
         btnWorker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWorkerActionPerformed(evt);
@@ -107,6 +118,11 @@ public class HomePage extends javax.swing.JFrame {
         btnAdmin.setForeground(new java.awt.Color(255, 255, 255));
         btnAdmin.setText("Admin");
         btnAdmin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdminMouseClicked(evt);
+            }
+        });
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdminActionPerformed(evt);
@@ -201,6 +217,24 @@ public class HomePage extends javax.swing.JFrame {
         AdminLogin admin = new AdminLogin();
         admin.setVisible(true);    
     }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
+        // TODO add your handling code here:
+		new UserLogin().setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_btnUserMouseClicked
+
+    private void btnWorkerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWorkerMouseClicked
+        // TODO add your handling code here:
+		new WorkerSignup().setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_btnWorkerMouseClicked
+
+    private void btnAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdminMouseClicked
+        // TODO add your handling code here:
+		new AdminLogin().setVisible(true); 
+		this.dispose();
+    }//GEN-LAST:event_btnAdminMouseClicked
 
     /**
      * @param args the command line arguments

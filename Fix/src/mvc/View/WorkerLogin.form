@@ -185,9 +185,9 @@
                                           <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
                                           <Component id="btnSignIn" min="-2" pref="129" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="txtPassword" min="-2" pref="429" max="-2" attributes="0"/>
+                                      <Component id="password_input" min="-2" pref="429" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="txtEmail" alignment="1" min="-2" pref="429" max="-2" attributes="0"/>
+                                          <Component id="email_input" alignment="1" min="-2" pref="429" max="-2" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="377" max="-2" attributes="0"/>
@@ -224,11 +224,11 @@
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtEmail" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="email_input" min="-2" pref="55" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtPassword" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="password_input" min="-2" pref="55" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblForgotPassword" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -265,7 +265,7 @@
                     <Property name="text" type="java.lang.String" value="Email :"/>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="txtEmail">
+                <Component class="swing.TextField" name="email_input">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="eb" red="fa" type="rgb"/>
@@ -277,7 +277,7 @@
                     <Property name="round" type="int" value="50"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="email_inputActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPassword">
@@ -303,6 +303,7 @@
                     <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSignInMouseClicked"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignInActionPerformed"/>
                   </Events>
                 </Component>
@@ -328,7 +329,7 @@
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblClickHereMouseClicked"/>
                   </Events>
                 </Component>
-                <Component class="swing.PasswordField" name="txtPassword">
+                <Component class="swing.PasswordField" name="password_input">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="eb" red="fa" type="rgb"/>

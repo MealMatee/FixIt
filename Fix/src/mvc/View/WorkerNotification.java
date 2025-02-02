@@ -4,8 +4,14 @@
  */
 package mvc.View;
 
-import java.awt.Color;
-import swing.RoundedBorder;
+import controller.WorkerController;
+import java.util.List;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.WorkRequest;
 
 /**
  *
@@ -18,7 +24,72 @@ public class WorkerNotification extends javax.swing.JPanel {
      */
     public WorkerNotification() {
         initComponents();
+		setOpaque(true);
+		notification_panel.setOpaque(true);
+		notification_panel.setLayout(new BoxLayout(notification_panel, BoxLayout.Y_AXIS));
+		loadRequests();
     }
+
+	public void loadRequests() {
+		notification_panel.removeAll();
+
+		List<WorkRequest> requests = WorkerController.getPendingRequests();
+
+		if (requests != null) {  // Check for null since your getPendingRequests can return null
+			for (WorkRequest request : requests) {
+				// Create panel for each request
+				JPanel requestPanel = new JPanel();
+				requestPanel.setLayout(new BoxLayout(requestPanel, BoxLayout.X_AXIS));
+
+				// Request label
+				JLabel label = new JLabel("Accept User Request? - User ID: " + request.getUserId());
+				requestPanel.add(label);
+				requestPanel.add(Box.createHorizontalGlue());
+
+				// Approve button
+				swing.Button approveBtn = new swing.Button();
+				approveBtn.setText("✓");
+				approveBtn.setBackground(new java.awt.Color(0, 204, 0));
+				approveBtn.setForeground(java.awt.Color.WHITE);
+				approveBtn.addActionListener(e -> handleApprove(request.getWorkRequestId()));
+
+				// Decline button
+				swing.Button declineBtn = new swing.Button();
+				declineBtn.setText("−");
+				declineBtn.setBackground(new java.awt.Color(255, 51, 51));
+				declineBtn.setForeground(java.awt.Color.WHITE);
+				declineBtn.addActionListener(e -> handleDecline(request.getWorkRequestId()));
+
+				requestPanel.add(approveBtn);
+				requestPanel.add(Box.createHorizontalStrut(10));
+				requestPanel.add(declineBtn);
+
+				notification_panel.add(requestPanel);
+				notification_panel.add(Box.createVerticalStrut(10));
+			}
+		}
+
+
+		notification_panel.revalidate();
+		notification_panel.repaint();
+	}
+
+	private void handleApprove(int requestId) {
+		if (!(WorkerController.approveRequest(requestId))) {
+			JOptionPane.showMessageDialog(this, "Request approved successfully!");
+			loadRequests(); // Refresh the panel
+                }
+	}
+
+	private void handleDecline(int requestId) {
+		if (WorkerController.declineRequest(requestId)) {
+			JOptionPane.showMessageDialog(this, "Request declined successfully!");
+			loadRequests(); // Refresh the panel
+		} else {
+			JOptionPane.showMessageDialog(this, "Failed to decline request.",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,154 +100,22 @@ public class WorkerNotification extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        button2 = new swing.Button();
-        jLabel1 = new javax.swing.JLabel();
-        button1 = new swing.Button();
-        jLabel2 = new javax.swing.JLabel();
-        button3 = new swing.Button();
-        button4 = new swing.Button();
-        jLabel3 = new javax.swing.JLabel();
-        button5 = new swing.Button();
-        button6 = new swing.Button();
-        jLabel4 = new javax.swing.JLabel();
-        button7 = new swing.Button();
-        button8 = new swing.Button();
+        notification_panel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        notification_panel.setBackground(new java.awt.Color(255, 255, 255));
 
-        button2.setBackground(new java.awt.Color(221, 35, 35));
-        button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/reject.png"))); // NOI18N
-        button2.setRound(40);
-        button2.setShadowColor(new java.awt.Color(221, 35, 35));
-
-        jLabel1.setBackground(new java.awt.Color(126, 170, 236));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Accept User Request?");
-        jLabel1.setBorder(new RoundedBorder(10, Color.WHITE,1));
-        jLabel1.setOpaque(true);
-
-        button1.setBackground(new java.awt.Color(0, 255, 81));
-        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/tick.png"))); // NOI18N
-        button1.setRound(40);
-        button1.setShadowColor(new java.awt.Color(0, 255, 81));
-
-        jLabel2.setBackground(new java.awt.Color(126, 170, 236));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Accept User Request?");
-        jLabel2.setBorder(new RoundedBorder(10, Color.WHITE,1));
-        jLabel2.setOpaque(true);
-
-        button3.setBackground(new java.awt.Color(0, 255, 81));
-        button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/tick.png"))); // NOI18N
-        button3.setRound(40);
-        button3.setShadowColor(new java.awt.Color(0, 255, 81));
-
-        button4.setBackground(new java.awt.Color(221, 35, 35));
-        button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/reject.png"))); // NOI18N
-        button4.setRound(40);
-        button4.setShadowColor(new java.awt.Color(221, 35, 35));
-
-        jLabel3.setBackground(new java.awt.Color(126, 170, 236));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Accept User Request?");
-        jLabel3.setBorder(new RoundedBorder(10, Color.WHITE,1));
-        jLabel3.setOpaque(true);
-
-        button5.setBackground(new java.awt.Color(0, 255, 81));
-        button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/tick.png"))); // NOI18N
-        button5.setRound(40);
-        button5.setShadowColor(new java.awt.Color(0, 255, 81));
-
-        button6.setBackground(new java.awt.Color(221, 35, 35));
-        button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/reject.png"))); // NOI18N
-        button6.setRound(40);
-        button6.setShadowColor(new java.awt.Color(221, 35, 35));
-
-        jLabel4.setBackground(new java.awt.Color(126, 170, 236));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Accept User Request?");
-        jLabel4.setBorder(new RoundedBorder(10, Color.WHITE,1));
-        jLabel4.setOpaque(true);
-
-        button7.setBackground(new java.awt.Color(221, 35, 35));
-        button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/reject.png"))); // NOI18N
-        button7.setRound(40);
-        button7.setShadowColor(new java.awt.Color(221, 35, 35));
-
-        button8.setBackground(new java.awt.Color(0, 255, 81));
-        button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/tick.png"))); // NOI18N
-        button8.setRound(40);
-        button8.setShadowColor(new java.awt.Color(0, 255, 81));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(button8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+        javax.swing.GroupLayout notification_panelLayout = new javax.swing.GroupLayout(notification_panel);
+        notification_panel.setLayout(notification_panelLayout);
+        notification_panelLayout.setHorizontalGroup(
+            notification_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1166, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(331, Short.MAX_VALUE))
+        notification_panelLayout.setVerticalGroup(
+            notification_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 735, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -185,32 +124,20 @@ public class WorkerNotification extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notification_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notification_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.Button button1;
-    private swing.Button button2;
-    private swing.Button button3;
-    private swing.Button button4;
-    private swing.Button button5;
-    private swing.Button button6;
-    private swing.Button button7;
-    private swing.Button button8;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel notification_panel;
     // End of variables declaration//GEN-END:variables
 }

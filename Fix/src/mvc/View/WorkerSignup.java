@@ -5,17 +5,19 @@
 package mvc.View;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import controller.AuthenticationController;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import swing.RippleEffectLabel;
-import swing.RoundedBorder;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import swing.RippleEffectLabel;
+import swing.RoundedBorder;
 
 
 /**
@@ -158,13 +160,18 @@ private Point initialClick;
         lblWorkerSignup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWorkerSignup.setText("Worker SignUp");
         slide.add(lblWorkerSignup);
-        lblWorkerSignup.setBounds(110, 40, 280, 48);
+        lblWorkerSignup.setBounds(110, 40, 280, 43);
 
         btnSignup.setBackground(new java.awt.Color(153, 153, 153));
         btnSignup.setForeground(new java.awt.Color(255, 255, 255));
         btnSignup.setText("Next");
         btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSignup.setRound(40);
+        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSignupMouseClicked(evt);
+            }
+        });
         btnSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignupActionPerformed(evt);
@@ -176,12 +183,12 @@ private Point initialClick;
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPassword.setText("Password :");
         slide.add(lblPassword);
-        lblPassword.setBounds(50, 340, 90, 25);
+        lblPassword.setBounds(50, 340, 90, 22);
 
         lblFirstName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblFirstName.setText("First Name :");
         slide.add(lblFirstName);
-        lblFirstName.setBounds(50, 100, 94, 25);
+        lblFirstName.setBounds(50, 100, 94, 22);
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
@@ -198,12 +205,12 @@ private Point initialClick;
         lblLastName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblLastName.setText("Last Name :");
         slide.add(lblLastName);
-        lblLastName.setBounds(290, 100, 94, 25);
+        lblLastName.setBounds(290, 100, 94, 22);
 
         lblWorkCertificate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblWorkCertificate.setText("Working Sector :");
         slide.add(lblWorkCertificate);
-        lblWorkCertificate.setBounds(290, 180, 150, 25);
+        lblWorkCertificate.setBounds(290, 180, 150, 22);
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtEmail.setRound(40);
@@ -213,19 +220,18 @@ private Point initialClick;
         lblGender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblGender.setText("Gender :");
         slide.add(lblGender);
-        lblGender.setBounds(300, 260, 110, 25);
+        lblGender.setBounds(300, 260, 110, 22);
 
         lblContactNo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblContactNo.setText("Contact No. :");
         slide.add(lblContactNo);
-        lblContactNo.setBounds(50, 260, 110, 25);
+        lblContactNo.setBounds(50, 260, 110, 22);
 
         lblConfirmPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblConfirmPassword.setText("Confirm Password :");
         slide.add(lblConfirmPassword);
-        lblConfirmPassword.setBounds(50, 430, 160, 25);
+        lblConfirmPassword.setBounds(50, 430, 160, 22);
 
-        txtLastName.setText("");
         txtLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtLastName.setPlaceholder("Enter Your Last Name");
         txtLastName.setRound(40);
@@ -302,7 +308,7 @@ private Point initialClick;
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblEmail.setText("Email :");
         slide.add(lblEmail);
-        lblEmail.setBounds(50, 180, 94, 25);
+        lblEmail.setBounds(50, 180, 94, 22);
 
         rbtnFemale.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         rbtnFemale.setText("Female");
@@ -538,6 +544,51 @@ private Point initialClick;
     private void txtContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContactActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContactActionPerformed
+
+	public static int getCategoryPosition(String category) {
+		switch (category.toLowerCase()) {
+			case "plumber":
+				return 1;
+			case "electrician":
+				return 2;
+			case "carpenter":
+				return 3;
+			default:
+				return 0; 
+		}
+	}
+
+    private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignupMouseClicked
+        // TODO add your handling code here:
+
+		// Get values from form fields
+		String firstName = txtFirstName.getText().trim();
+		String lastName = txtLastName.getText().trim();
+		String email = txtEmail.getText().trim();
+		String phone = txtContact.getText().trim();
+		String password = new String(txtPassword.getPassword());
+		String confirmPassword = new String(txtConfirmPassword.getPassword());
+		String gender = rbtnMale.isSelected() ? "Male" : "Female";
+		String category = jComboBox1.getSelectedItem().toString();
+		int categoryPosition = getCategoryPosition(category);
+
+		// Validate password match
+		if (!password.equals(confirmPassword)) {
+			JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		// Register user
+		boolean success = AuthenticationController.registerWorker(firstName, lastName, email, categoryPosition, phone, gender, password );
+
+		if (success) {
+			JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			new  WorkerLogin().setVisible(true);
+			this.dispose();
+		} else {
+			JOptionPane.showMessageDialog(this, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+    }//GEN-LAST:event_btnSignupMouseClicked
 private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {    
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/workersignupblur.png")));
         jLabel1.setVisible(true);

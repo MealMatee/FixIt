@@ -5,10 +5,13 @@
 package mvc.View;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import controller.AuthenticationController;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
+import model.LoginResult;
 import swing.RippleEffectLabel;
 import swing.RoundedBorder;
 
@@ -48,12 +51,12 @@ public class WorkerLogin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblWorkerLogin = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
-        txtEmail = new swing.TextField();
+        email_input = new swing.TextField();
         lblPassword = new javax.swing.JLabel();
         btnSignIn = new swing.Button();
         lblForgotPassword = new javax.swing.JLabel();
         lblClickHere = new javax.swing.JLabel();
-        txtPassword = new swing.PasswordField();
+        password_input = new swing.PasswordField();
         btnDashBoard = new swing.Button();
         titleBar = new javax.swing.JPanel();
         btnClose = new javax.swing.JLabel();
@@ -142,13 +145,13 @@ public class WorkerLogin extends javax.swing.JFrame {
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblEmail.setText("Email :");
 
-        txtEmail.setBackground(new java.awt.Color(250, 235, 204));
-        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtEmail.setPlaceholder("example@gmail.com");
-        txtEmail.setRound(50);
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+        email_input.setBackground(new java.awt.Color(250, 235, 204));
+        email_input.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_input.setPlaceholder("example@gmail.com");
+        email_input.setRound(50);
+        email_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
+                email_inputActionPerformed(evt);
             }
         });
 
@@ -160,6 +163,11 @@ public class WorkerLogin extends javax.swing.JFrame {
         btnSignIn.setText("Sign In");
         btnSignIn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnSignIn.setRound(40);
+        btnSignIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSignInMouseClicked(evt);
+            }
+        });
         btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignInActionPerformed(evt);
@@ -178,8 +186,8 @@ public class WorkerLogin extends javax.swing.JFrame {
             }
         });
 
-        txtPassword.setBackground(new java.awt.Color(250, 235, 204));
-        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        password_input.setBackground(new java.awt.Color(250, 235, 204));
+        password_input.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,9 +212,9 @@ public class WorkerLogin extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(145, 145, 145)
                                 .addComponent(btnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(lblEmail)
                                     .addGap(377, 377, 377))
@@ -233,11 +241,11 @@ public class WorkerLogin extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(lblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(lblPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForgotPassword)
@@ -390,9 +398,9 @@ public class WorkerLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSignInActionPerformed
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+    private void email_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_inputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    }//GEN-LAST:event_email_inputActionPerformed
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/workerlogin.png")));
@@ -445,6 +453,46 @@ public class WorkerLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnMinimize.setBackground(new Color(204, 204, 0));
     }//GEN-LAST:event_btnMinimizeMouseExited
+
+    private void btnSignInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignInMouseClicked
+        // TODO add your handling code here:
+		String email = email_input.getText().trim();
+		String password = new String(password_input.getPassword());
+
+		// Validate empty fields
+		if (email.isEmpty() || password.isEmpty()) {
+			JOptionPane.showMessageDialog(this,
+					"Please fill in all fields!",
+					"Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+
+		// Attempt login
+		LoginResult result = AuthenticationController.loginWorker(email, password);
+
+		if (result.isSuccess()) {
+			JOptionPane.showMessageDialog(this,
+					"Welcome back, " + result.getName() + "!",
+					"Login Successful",
+					JOptionPane.INFORMATION_MESSAGE);
+			new WorkerDashboard().setVisible(true);
+
+			this.dispose();
+		} else {
+			// Login failed
+			JOptionPane.showMessageDialog(this,
+					"Invalid email or password!",
+					"Login Failed",
+					JOptionPane.ERROR_MESSAGE);
+
+			// Clear password field but keep email
+			password_input.setText("");
+			password_input.requestFocus();
+		}
+
+    }//GEN-LAST:event_btnSignInMouseClicked
 private void btnSignupMouseEntered(java.awt.event.MouseEvent evt) {    
   jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/workerloginblur.png")));
         jLabel1.setVisible(true);
@@ -474,6 +522,7 @@ private void btnSignupMouseEntered(java.awt.event.MouseEvent evt) {
     private swing.Button btnDashBoard;
     private javax.swing.JLabel btnMinimize;
     private swing.Button btnSignIn;
+    private swing.TextField email_input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -486,10 +535,9 @@ private void btnSignupMouseEntered(java.awt.event.MouseEvent evt) {
     private javax.swing.JLabel lblWorkerLogin;
     private swing.PanelBorder panelBorder1;
     private swing.PanelGradiente panelGradiente1;
+    private swing.PasswordField password_input;
     private swing.PanelSlide slidehover;
     private javax.swing.JPanel titleBar;
-    private swing.TextField txtEmail;
-    private swing.PasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 
 private javax.swing.JLabel btnSignup;

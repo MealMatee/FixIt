@@ -208,6 +208,7 @@
                     <Property name="round" type="int" value="40"/>
                   </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSignupMouseClicked"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignupActionPerformed"/>
                   </Events>
                   <Constraints>
@@ -344,7 +345,6 @@
                 </Component>
                 <Component class="swing.TextField" name="txtLastName">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value=""/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>

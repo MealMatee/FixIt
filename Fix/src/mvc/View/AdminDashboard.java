@@ -5,13 +5,14 @@
 package mvc.View;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import java.awt.Color;
-import swing.RoundedBorder;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import swing.Button;
+import swing.RoundedBorder;
+
 
 /**
  *
@@ -36,6 +37,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     
     TablePanel.add(new ManageUser(), "ManageUser");
     TablePanel.add(new ManageWorker(), "ManageWorker");
+displaydefault();
      setupButtonActions(btnManageUser);
         setupButtonActions(btnManageWorker);
 
@@ -299,6 +301,11 @@ private void setupButtonActions(Button button) {
         HomePage home = new HomePage();
         home.setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
+
+	public void displaydefault() {
+                TablePanel.setVisible(true);
+            cardLayout.show(TablePanel, "ManageUser");
+	}
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,7 @@
  */
 package mvc.View;
 
+import controller.AuthenticationController;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -25,7 +26,7 @@ private final CardLayout cardLayout;
      * Creates new form UserDashboard
      */
     public UserDashboard() {
-initComponents();
+		initComponents();
         setTitle("User DashBoard");
         setIconImage(new ImageIcon(getClass().getResource("/Image/dashboard.png")).getImage());
         Color col = new Color(126,170,236);
@@ -37,10 +38,15 @@ initComponents();
     TablePanel.add(new UserProfile(), "UserProfile");
     TablePanel.add(new UserNotification(),"UserNotification");
     TablePanel.add(new HireWorker(), "HireWorker");
+initializeTablePanel();
+displayUser();
 setupButtonActions(btnProfile); 
 setupButtonActions(btnNotification); 
 setupButtonActions(btnHire);     }
 
+    public void displayUser() {
+        username_label.setText(AuthenticationController.U_username);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +65,7 @@ setupButtonActions(btnHire);     }
         btnHire = new swing.Button();
         panelBorder2 = new swing.PanelBorder();
         button4 = new swing.Button();
-        lblUsername = new javax.swing.JLabel();
+        username_label = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         TablePanel = new swing.PanelSlide();
 
@@ -198,18 +204,18 @@ setupButtonActions(btnHire);     }
             }
         });
 
-        lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsername.setText("HI,(USERNAME)");
-        lblUsername.setToolTipText("");
-        lblUsername.setBorder(new RoundedBorder(40 , new Color(0, 41, 88), 1));
-        lblUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        username_label.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        username_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        username_label.setText("HI,(USERNAME)");
+        username_label.setToolTipText("");
+        username_label.setBorder(new RoundedBorder(40 , new Color(0, 41, 88), 1));
+        username_label.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Fixit.png"))); // NOI18N
 
         panelBorder2.setLayer(button4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panelBorder2.setLayer(lblUsername, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelBorder2.setLayer(username_label, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelBorder2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
@@ -219,7 +225,7 @@ setupButtonActions(btnHire);     }
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 435, Short.MAX_VALUE)
-                .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(username_label, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 440, Short.MAX_VALUE)
                 .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -230,7 +236,7 @@ setupButtonActions(btnHire);     }
                 .addGap(19, 19, 19)
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(username_label, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addComponent(jLabel6)
@@ -320,6 +326,11 @@ private void setupButtonActions(Button button) {
         cardLayout.show(TablePanel, "HireWorker");
     }//GEN-LAST:event_btnHireActionPerformed
 
+	public void initializeTablePanel() {
+		TablePanel.setVisible(true);
+		cardLayout.show(TablePanel, "WorkerProfile");
+	}
+
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -373,7 +384,7 @@ private void setupButtonActions(Button button) {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel lblUsername;
     private swing.PanelBorder panelBorder2;
+    private javax.swing.JLabel username_label;
     // End of variables declaration//GEN-END:variables
 }

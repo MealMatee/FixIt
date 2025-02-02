@@ -4,7 +4,15 @@
  */
 package mvc.View;
 
+import controller.AuthenticationController;
+import controller.UserController;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import model.WorkRequest;
 import swing.RoundedBorder;
 
 /**
@@ -18,7 +26,42 @@ public class UserNotification extends javax.swing.JPanel {
      */
     public UserNotification() {
         initComponents();
+		setOpaque(true);
+		notification_panel.setOpaque(true);
+		notification_panel.setLayout(new BoxLayout(notification_panel, BoxLayout.Y_AXIS));
+		loadRequests();
     }
+
+
+	public void loadRequests() {
+		notification_panel.removeAll();
+
+		List<WorkRequest> requests = UserController.getApprovedRequests(AuthenticationController.getCurrentUserId());
+		System.out.println("requests: " +requests);
+
+		if (requests != null) {  // Check for null since your getPendingRequests can return null
+			for (WorkRequest request : requests) {
+				// Create panel for each request
+				JPanel requestPanel = new JPanel();
+				requestPanel.setLayout(new BoxLayout(requestPanel, BoxLayout.X_AXIS));
+
+				// Request label
+				JLabel label = new JLabel("approved task  - worker ID: " + request.getWorkRequestId());
+				requestPanel.add(label);
+				requestPanel.add(Box.createHorizontalGlue());
+
+
+
+				notification_panel.add(requestPanel);
+				notification_panel.add(Box.createVerticalStrut(10));
+			}
+		}
+
+
+		notification_panel.revalidate();
+		notification_panel.repaint();
+	}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,13 +72,13 @@ public class UserNotification extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        notification_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        notification_panel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(126, 170, 236));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -69,22 +112,22 @@ public class UserNotification extends javax.swing.JPanel {
         jLabel4.setBorder(new RoundedBorder(10, Color.WHITE,1));
         jLabel4.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout notification_panelLayout = new javax.swing.GroupLayout(notification_panel);
+        notification_panel.setLayout(notification_panelLayout);
+        notification_panelLayout.setHorizontalGroup(
+            notification_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notification_panelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(notification_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        notification_panelLayout.setVerticalGroup(
+            notification_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notification_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -102,14 +145,14 @@ public class UserNotification extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notification_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notification_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -120,6 +163,6 @@ public class UserNotification extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel notification_panel;
     // End of variables declaration//GEN-END:variables
 }

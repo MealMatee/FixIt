@@ -5,11 +5,13 @@
 package mvc.View;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import controller.AuthenticationController;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -155,13 +157,18 @@ public class UserSignup extends javax.swing.JFrame {
         lbUserSignup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbUserSignup.setText("User SignUp");
         slide.add(lbUserSignup);
-        lbUserSignup.setBounds(110, 40, 250, 48);
+        lbUserSignup.setBounds(110, 40, 250, 43);
 
         btnSignup.setBackground(new java.awt.Color(153, 153, 153));
         btnSignup.setForeground(new java.awt.Color(255, 255, 255));
         btnSignup.setText("Next");
         btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSignup.setRound(40);
+        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSignupMouseClicked(evt);
+            }
+        });
         btnSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignupActionPerformed(evt);
@@ -173,12 +180,12 @@ public class UserSignup extends javax.swing.JFrame {
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPassword.setText("Password :");
         slide.add(lblPassword);
-        lblPassword.setBounds(50, 340, 90, 25);
+        lblPassword.setBounds(50, 340, 90, 22);
 
         lblFirstName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblFirstName.setText("First Name :");
         slide.add(lblFirstName);
-        lblFirstName.setBounds(50, 100, 94, 25);
+        lblFirstName.setBounds(50, 100, 94, 22);
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,12 +203,12 @@ public class UserSignup extends javax.swing.JFrame {
         lblLastName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblLastName.setText("Last Name :");
         slide.add(lblLastName);
-        lblLastName.setBounds(290, 100, 94, 25);
+        lblLastName.setBounds(290, 100, 94, 22);
 
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblEmail.setText("Email :");
         slide.add(lblEmail);
-        lblEmail.setBounds(50, 180, 94, 25);
+        lblEmail.setBounds(50, 180, 94, 22);
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtEmail.setRound(40);
@@ -211,17 +218,17 @@ public class UserSignup extends javax.swing.JFrame {
         lblGender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblGender.setText("Gender :");
         slide.add(lblGender);
-        lblGender.setBounds(280, 260, 110, 25);
+        lblGender.setBounds(280, 260, 110, 22);
 
         lblContactNo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblContactNo.setText("Contact No. :");
         slide.add(lblContactNo);
-        lblContactNo.setBounds(50, 260, 110, 25);
+        lblContactNo.setBounds(50, 260, 110, 22);
 
         lblConfirmPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblConfirmPassword.setText("Confirm Password :");
         slide.add(lblConfirmPassword);
-        lblConfirmPassword.setBounds(50, 430, 160, 25);
+        lblConfirmPassword.setBounds(50, 430, 160, 22);
 
         txtLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtLastName.setPlaceholder("Enter Your Last Name");
@@ -533,6 +540,35 @@ public class UserSignup extends javax.swing.JFrame {
     private void rbtnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMaleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnMaleActionPerformed
+
+    private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignupMouseClicked
+        // TODO add your handling code here:
+		
+		String firstName = txtFirstName.getText().trim();
+		String lastName = txtLastName.getText().trim();
+		String email = txtEmail.getText().trim();
+		String phone = txtContact.getText().trim();
+		String password = new String(txtPassword.getPassword());
+		String confirmPassword = new String(txtConfirmPassword.getPassword());
+		String gender = rbtnMale.isSelected() ? "Male" : "Female";
+
+		// Validate password match
+		if (!password.equals(confirmPassword)) {
+			JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		// Register user
+		boolean success = AuthenticationController.registerUser(firstName, lastName, email, phone, gender, password );
+
+		if (success) {
+			JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			new  UserLogin().setVisible(true);
+			this.dispose();
+		} else {
+			JOptionPane.showMessageDialog(this, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+    }//GEN-LAST:event_btnSignupMouseClicked
 private void btnSigninMouseEntered(java.awt.event.MouseEvent evt) {    
      jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/usersignupblur.png")));
         jLabel1.setVisible(true);
